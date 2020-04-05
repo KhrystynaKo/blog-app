@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "react-router-dom"
 
 import Favorites from "../features/favorite/Favorites"
 
@@ -8,7 +9,9 @@ const Navbar = () => {
       <div className="uk-navbar-left">
         <ul className="uk-navbar-nav">
           <li className="uk-active">
-            <a href="posts-grid.html">Posts</a>
+            <Link to="/" href="posts-grid.html">
+              Posts
+            </Link>
           </li>
           <li>
             <a href="albums.html">Albums</a>
