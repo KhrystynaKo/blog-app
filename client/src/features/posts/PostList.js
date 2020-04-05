@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "react-router-dom"
 
 import Button from "../../components/Button"
 import Favorite from "../favorite/Favorite"
@@ -20,9 +21,13 @@ const PostList = ({ post }) => {
             <Favorite id={post.id} title={post.title} type="post" />
           </h3>
           <p>{post.body}</p>
-          <Button href="/" color="text">
+          <Link
+            to={`/post/${post.id}`}
+            href="post.html"
+            className="uk-button uk-button-text"
+          >
             Read more
-          </Button>
+          </Link>
         </div>
       </div>
     </div>
