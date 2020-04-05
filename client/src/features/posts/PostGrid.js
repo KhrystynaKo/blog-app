@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "react-router-dom"
 
 import Button from "../../components/Button"
 import Favorite from "../favorite/Favorite"
@@ -15,9 +16,13 @@ const PostGrid = ({ post }) => {
         <p>{post.body}</p>
       </div>
       <div className="uk-card-footer">
-        <Button href="/" color="text">
+        <Link
+          to={`/post/${post.id}`}
+          href="post.html"
+          className="uk-button uk-button-text"
+        >
           Read more
-        </Button>
+        </Link>
       </div>
     </div>
   )
