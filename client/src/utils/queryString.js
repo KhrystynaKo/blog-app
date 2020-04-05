@@ -1,6 +1,9 @@
-const queryString = (params) =>
-  Object.keys(params)
-    .map((key) => key + "=" + params[key])
+const queryString = (params) => {
+  return Object.keys(params)
+    .map((key) => {
+      return key + "=" + params[key]
+    })
     .join("&")
+}
 
 export default queryString

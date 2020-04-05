@@ -1,44 +1,39 @@
-import React from "react"
-
+import React, { useState, useEffect } from "react"
+import { useParams } from "react-router-dom"
+import useFetch from "../../hooks/useFetch"
 import Comments from "../comments/Comments"
 
 const Post = () => {
+  let { id } = useParams()
+  const [options, setOptions] = useState({
+    _embed: "comments",
+    _expand: "user",
+  })
+  const { data } = useFetch(`/posts/${id}`, options)
+  const [comments, setComments] = useState([])
+
+  useEffect(() => {
+    data && setComments(data.comments)
+  }, [data])
+  data && console.log(data.comments)
+  console.log(comments)
   return (
     <>
       <h1 className="uk-heading-bullet uk-margin-medium-bottom">
-        <span>Post title</span>
-        <a className="uk-text-small" href="/">
-          Author
-        </a>
+        {data && <span>{data.title}</span>}
+        {data && (
+          <a className="uk-text-small" href="#">
+            {data.user.name}
+          </a>
+        )}
       </h1>
       <div className="uk-article uk-dropcap uk-margin-large-bottom">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis fuga
-          adipisci facere natus quas, corporis assumenda provident perferendis
-          commodi odio ea vel saepe, numquam reiciendis tenetur rerum.
-          Assumenda, quae, eius! Lorem ipsum dolor sit amet, consectetur
-          adipisicing elit. Facilis fuga adipisci facere natus quas, corporis
-          assumenda provident perferendis commodi odio ea vel saepe, numquam
-          reiciendis tenetur rerum. Assumenda, quae, eius! Lorem ipsum dolor sit
-          amet, consectetur adipisicing elit. Facilis fuga adipisci facere natus
-          quas, corporis assumenda provident perferendis commodi odio ea vel
-          saepe, numquam reiciendis tenetur rerum. Assumenda, quae, eius!
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis fuga
-          adipisci facere natus quas, corporis assumenda provident perferendis
-          commodi odio ea vel saepe, numquam reiciendis tenetur rerum.
-          Assumenda, quae, eius!
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis fuga
-          adipisci facere natus quas, corporis assumenda provident perferendis
-          commodi odio ea vel saepe, numquam reiciendis tenetur rerum.
-          Assumenda, quae, eius!
-        </p>
+        <div className="uk-article uk-dropcap uk-margin-large-bottom">
+          {data && <p>{data.body}</p>}
+        </div>
       </div>
       <hr />
-      <Comments />
+      <Comments id={id} comments={comments} setComments={setComments} />
     </>
   )
 }

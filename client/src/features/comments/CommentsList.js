@@ -2,16 +2,18 @@ import React from "react"
 
 import Comment from "./Comment"
 
-const CommentsList = () => {
+const CommentsList = ({ comments }) => {
   return (
     <div className="uk-comments">
-      <Comment />
       <hr />
-      <Comment />
-      <hr />
-      <Comment />
-      <hr />
-      <Comment />
+      {comments.map((commentItem) => (
+        <Comment
+          key={commentItem.id}
+          author={commentItem.name}
+          email={commentItem.email}
+          commentBody={commentItem.body}
+        />
+      ))}
     </div>
   )
 }
